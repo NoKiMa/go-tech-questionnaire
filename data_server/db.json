@@ -1,0 +1,8 @@
+{
+  "questions": [
+    { "id": 1, "question": "What language is your favorite?", "options": ["JavaScript", "TypeScript", "CoffeeScript"], "type": "checkbox",  "required": true},
+    { "id": 2, "question": "What do you like about programing?", "options": "", "type": "text",  "required": false},
+    { "id": 2, "question": "How was the assignment?", "options": ["Easy", "Normal", "Hard", ""],"type": "radio",  "required": true}
+  ],
+  "answers": {"favorite_leng":"", "about_program":"", "assignment_level":""}
+}
