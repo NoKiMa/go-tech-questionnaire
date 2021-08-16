@@ -18,32 +18,25 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    console.log("questions", questions);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [questions]);
-  // const setAnswer = (answer: string | string[]) => {
+  const setAnswer = (answer: string | string[]) => {
 
-  //  }
+   }
 
   return (
     <div className="App">
       <div className="container">
         <HeaderComponent />
       </div>
-      {questions.map((question) => {
+        {questions.map((question) => {
         return (
           <div key={question.id} className="container">
             <QuestionComponent
               question={question}
-              // setAnswer={(answer: string | string[]) =>  { setAnswer(answer)}}
+              getAnswer={setAnswer}
             />
           </div>
         );
       })}
-      {/* <div className="container">
-        <QuestionComponent/>
-      </div> */}
     </div>
   );
 }

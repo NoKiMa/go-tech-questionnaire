@@ -9,7 +9,7 @@ const datafetchService = async () => {
       options: item.options,
       question: item.question,
       required: item.required,
-      type: item.type
+      type: item.type,
     }
   })
   return res;

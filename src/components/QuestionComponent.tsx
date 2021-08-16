@@ -5,7 +5,7 @@ import RoundCheckbox from "./RoundCheckbox";
 
 interface QuestionComponentProps {
   question: IQuestion;
-  // setAnswer(): string | string[];
+  getAnswer: (answer:string|string[]) => void;
 }
 
 const QuestionComponent = (props: QuestionComponentProps) => {
@@ -15,9 +15,10 @@ const QuestionComponent = (props: QuestionComponentProps) => {
         {props.question.question}{" "}
         {props.question.required ? <span className="required">*</span> : null}
       </p>
+      <form>
       {Array.isArray(props.question.options) ? (
         props.question.options.map((option) => (
-          <div className="variant">
+          <div key={option} className="variant">
             <RoundCheckbox />
             <p className="text_variant">{option}</p>
           </div>
@@ -28,6 +29,7 @@ const QuestionComponent = (props: QuestionComponentProps) => {
           </div>
         
       )}
+      </form>
     </div>
   );
 };
