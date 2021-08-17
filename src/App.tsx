@@ -4,6 +4,7 @@ import QuestionComponent from "./components/QuestionComponent";
 import "./App.scss";
 // services
 import datafetchService from "./services/datafetchService";
+import pushDataService from "./services/pushDataService";
 //interfaces
 import IQuestion from "./models/IQuestion";
 import IAnswer from "./models/IAnswer";
@@ -34,7 +35,8 @@ function App() {
     let requiredQuestions: string[] = questions.filter(item => item.required).map(item => item.question);
     let requiredAnswers: string[] = answers.filter(item => item.required).map(item => item.question);
     if (requiredAnswers.length === requiredQuestions.length) {
-      alert("OK")
+      pushDataService(answers);
+      alert("OK!")
     } else {
       alert("Fild all filds!")
     }

@@ -1,8 +1,35 @@
 {
   "questions": [
-    { "id": 1, "question": "What language is your favorite?", "options": ["JavaScript", "TypeScript", "CoffeeScript"], "type": "checkbox",  "required": true},
-    { "id": 2, "question": "What do you like about programing?", "options": "", "type": "text",  "required": false},
-    { "id": 3, "question": "How was the assignment?", "options": ["Easy", "Normal", "Hard", "Other"],"type": "radio",  "required": true}
+    {
+      "id": 1,
+      "question": "What language is your favorite?",
+      "options": [
+        "JavaScript",
+        "TypeScript",
+        "CoffeeScript"
+      ],
+      "type": "checkbox",
+      "required": true
+    },
+    {
+      "id": 2,
+      "question": "What do you like about programing?",
+      "options": "",
+      "type": "text",
+      "required": false
+    },
+    {
+      "id": 3,
+      "question": "How was the assignment?",
+      "options": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Other"
+      ],
+      "type": "radio",
+      "required": true
+    }
   ],
   "answers": []
 }
