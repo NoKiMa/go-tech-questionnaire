@@ -1,13 +1,32 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import "../App.scss";
+import IAnswer from "../models/IAnswer";
 import IQuestion from "../models/IQuestion";
 
 interface QuestionComponentProps {
   question: IQuestion;
-  getAnswer: (answer: string | string[]) => void;
+  getAnswer: (answer: IAnswer) => void;
 }
 
 const QuestionComponent = (props: QuestionComponentProps) => {
+
+  const [answer, setAnswer] = useState<IAnswer>();
+
+  const hendleInput = (e: any) => {
+    let answerItem: IAnswer = {
+      question: props.question.question,
+      answer: e.target.value
+    }
+     setAnswer(answerItem);
+  }
+
+  useEffect(() => {
+    if (answer) {
+      props.getAnswer(answer)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[answer])
+
   return (
     <div className="question_container">
       <p>
@@ -24,6 +43,8 @@ const QuestionComponent = (props: QuestionComponentProps) => {
                     className="with-gap"
                     name="group1"
                     type="radio"
+                    value={option}
+                    onChange={hendleInput}
                   />
                   <span className="option_text">{option}</span>
                 </label>
@@ -31,7 +52,7 @@ const QuestionComponent = (props: QuestionComponentProps) => {
               {option === "Other" ? (
                 <div className="col m4 l8 text_input">
                   <div>
-                    <input type="text" className="validate" />
+                    <input type="text" className="validate"  value={""} onChange={hendleInput}/>
                   </div>
                 </div>
               ) : null}

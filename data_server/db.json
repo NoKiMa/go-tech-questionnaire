@@ -4,5 +4,5 @@
     { "id": 2, "question": "What do you like about programing?", "options": "", "type": "text",  "required": false},
     { "id": 3, "question": "How was the assignment?", "options": ["Easy", "Normal", "Hard", "Other"],"type": "radio",  "required": true}
   ],
-  "answers": {"favorite_leng":[], "about_program":"", "assignment_level":""}
+  "answers": []
 }

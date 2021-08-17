@@ -6,10 +6,11 @@ import "./App.scss";
 import datafetchService from "./services/datafetchService";
 //interfaces
 import IQuestion from "./models/IQuestion";
+import IAnswer from "./models/IAnswer";
 
 function App() {
   const [questions, setQuestions] = useState<IQuestion[]>([]);
-
+  const [answers, setAnswers] = useState<IAnswer[]>([]);
   useEffect(() => {
     datafetchService().then((data) => {
       let res = data;
@@ -18,7 +19,12 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const setAnswer = (answer: string | string[]) => {};
+  const setAnswer = (answer: IAnswer) => {
+    console.log("answer", answer);
+    let newAnswers: IAnswer[] = answers.filter(item => item.question !== answer.question);
+    newAnswers.push(answer);
+    setAnswers(newAnswers);
+  };
 
   return (
     <div className="App">
@@ -28,7 +34,9 @@ function App() {
       {questions.map((question) => {
         return (
           <div key={question.id} className="container">
-            <QuestionComponent question={question} getAnswer={setAnswer} />
+            <QuestionComponent
+              question={question}
+              getAnswer={setAnswer} />
           </div>
         );
       })}
