@@ -31,18 +31,13 @@ function App() {
   };
 
   const submitData = () => {
-    let isOk = false;
-    let requiredQuestions: string[] = questions.filter(item => item.required).map(item => item.question)
-    console.log("answers", answers);
-    console.log("requiredQuestions", requiredQuestions);
-    // answers.forEach(item => {
-    //   isOk = !requiredQuestions.includes(item.question) ? true : false;
-    // })
-    // if (isOk) {
-    //   console.log(answers)
-    // } else {
-    //   alert("Fild all filds!")
-    // }
+    let requiredQuestions: string[] = questions.filter(item => item.required).map(item => item.question);
+    let requiredAnswers: string[] = answers.filter(item => item.required).map(item => item.question);
+    if (requiredAnswers.length === requiredQuestions.length) {
+      alert("OK")
+    } else {
+      alert("Fild all filds!")
+    }
   }
 
   return (
