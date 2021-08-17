@@ -12,12 +12,11 @@
 }
 
 .header_container {
-  margin-top: 70px;
+  margin-top: 50px;
   align-items: center;
   justify-content: flex-start;
   background-color: white;
   border-radius: 5px;
-  // padding: 10px 0 5px 15px;
   p {
     width: 60%;
     margin-top: 20px;
@@ -131,4 +130,15 @@
   position: relative;
   width: 60%;
   margin: 0 20px;
+}
+
+.radio_btn{
+  margin-right: 20px;
+}
+
+.text_input{
+  margin-top: 5px !important;
+}
+.option_container{
+  margin: 0;
 }
