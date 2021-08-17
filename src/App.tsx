@@ -30,6 +30,21 @@ function App() {
     setAnswers(newAnswers);
   };
 
+  const submitData = () => {
+    let isOk = false;
+    let requiredQuestions: string[] = questions.filter(item => item.required).map(item => item.question)
+    console.log("answers", answers);
+    console.log("requiredQuestions", requiredQuestions);
+    // answers.forEach(item => {
+    //   isOk = !requiredQuestions.includes(item.question) ? true : false;
+    // })
+    // if (isOk) {
+    //   console.log(answers)
+    // } else {
+    //   alert("Fild all filds!")
+    // }
+  }
+
   return (
     <div className="App">
       <div className="container">
@@ -47,7 +62,10 @@ function App() {
       <div className="container">
         <div className="row">
           <div className="col s12 offset-s5">
-            <button className="waves-effect waves-light btn submit_btn">
+            <button
+              className="waves-effect waves-light btn submit_btn"
+              onClick={submitData}
+            >
               Submit
             </button>
           </div>

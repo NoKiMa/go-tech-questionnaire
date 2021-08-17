@@ -17,6 +17,7 @@ const QuestionComponent = (props: QuestionComponentProps) => {
     let answerItem: IAnswer = {
       question: props.question.question,
       answer: e.target.value,
+      required:props.question.required
     };
     setTextInput("");
     setAnswer(answerItem);
@@ -26,12 +27,18 @@ const QuestionComponent = (props: QuestionComponentProps) => {
   const hendleText = (e: any) => {
     setTextInput(e.target.value)
   };
+
   useEffect(() => {
     let answerItem: IAnswer = {
       question: props.question.question,
       answer: textInput,
+      required:props.question.required
     };
-    if (textInput !== "" && props.question.required) {
+    if (textInput === "") {
+      if (!props.question.required) {
+        setAnswer(answerItem);
+      }
+    } else {
       setAnswer(answerItem);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -89,7 +96,7 @@ const QuestionComponent = (props: QuestionComponentProps) => {
           ))
         ) : (
           <div className="variant_text">
-            <input type="text" placeholder="Your answer" />
+            <input type="text" placeholder="Your answer" value={textInput} onChange={hendleText} />
           </div>
         )}
       </form>
