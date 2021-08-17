@@ -1,7 +1,8 @@
 import IQuestion from '../models/IQuestion'
+import {QUESTIONS_URL} from '../utils/const'
 
 const datafetchService = async () => {
-  let response = await fetch("http://localhost:3004/questions");
+  let response = await fetch(QUESTIONS_URL);
   let data = await response.json();
   let res: IQuestion[] = data.map( (item:any) => {
     return {

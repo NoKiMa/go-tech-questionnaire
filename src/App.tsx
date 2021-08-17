@@ -18,25 +18,29 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const setAnswer = (answer: string | string[]) => {
-
-   }
+  const setAnswer = (answer: string | string[]) => {};
 
   return (
     <div className="App">
       <div className="container">
         <HeaderComponent />
       </div>
-        {questions.map((question) => {
+      {questions.map((question) => {
         return (
           <div key={question.id} className="container">
-            <QuestionComponent
-              question={question}
-              getAnswer={setAnswer}
-            />
+            <QuestionComponent question={question} getAnswer={setAnswer} />
           </div>
         );
       })}
+      <div className="container">
+        <div className="row">
+          <div className="col s12 offset-s5">
+            <button className="waves-effect waves-light btn submit_btn">
+              Submit
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
