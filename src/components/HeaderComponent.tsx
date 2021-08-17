@@ -6,7 +6,7 @@ const HeaderComponent = () =>{
     <div className="header_container">
         <div className="decoration"/>
         <p className="title"> GoTech Qustionnaire</p>
-        <p className="subtitle"> Show me what you got</p>
+        <p className="subtitle"> Show me what you got!</p>
         <p className="required"> * Required </p>
     </div>
   )

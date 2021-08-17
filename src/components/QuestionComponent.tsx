@@ -1,7 +1,6 @@
 import React from "react";
 import "../App.scss";
 import IQuestion from "../models/IQuestion";
-import RoundCheckbox from "./RoundCheckbox";
 
 interface QuestionComponentProps {
   question: IQuestion;
@@ -18,10 +17,6 @@ const QuestionComponent = (props: QuestionComponentProps) => {
       <form action="#">
         {Array.isArray(props.question.options) ? (
           props.question.options.map((option) => (
-            // <div key={option} className="variant">
-            //   <RoundCheckbox />
-            //   <p className="text_variant">{option}</p>
-            // </div>
             <div key={option} className="row option_container">
               <p className="col m1 l1 radio_btn">
                 <label>
@@ -30,7 +25,7 @@ const QuestionComponent = (props: QuestionComponentProps) => {
                     name="group1"
                     type="radio"
                   />
-                  <span>{option}</span>
+                  <span className="option_text">{option}</span>
                 </label>
               </p>
               {option === "Other" ? (
