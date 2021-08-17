@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect,  useState } from "react";
 import "../App.scss";
 import IAnswer from "../models/IAnswer";
 import IQuestion from "../models/IQuestion";
@@ -9,23 +9,44 @@ interface QuestionComponentProps {
 }
 
 const QuestionComponent = (props: QuestionComponentProps) => {
-
   const [answer, setAnswer] = useState<IAnswer>();
+  const [isDisabled, setIsDisabled] = useState<boolean>(true);
+  const [textInput, setTextInput] = useState<string>("");
 
   const hendleInput = (e: any) => {
     let answerItem: IAnswer = {
       question: props.question.question,
-      answer: e.target.value
+      answer: e.target.value,
+    };
+    setTextInput("");
+    setAnswer(answerItem);
+    setIsDisabled(true);
+  };
+
+  const hendleText = (e: any) => {
+    setTextInput(e.target.value)
+  };
+  useEffect(() => {
+    let answerItem: IAnswer = {
+      question: props.question.question,
+      answer: textInput,
+    };
+    if (textInput !== "" && props.question.required) {
+      setAnswer(answerItem);
     }
-     setAnswer(answerItem);
-  }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[textInput])
+  
+  const hendleFocusOnText = () => {
+    setIsDisabled(false);
+  };
 
   useEffect(() => {
     if (answer) {
-      props.getAnswer(answer)
+      props.getAnswer(answer);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[answer])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [answer]);
 
   return (
     <div className="question_container">
@@ -44,7 +65,9 @@ const QuestionComponent = (props: QuestionComponentProps) => {
                     name="group1"
                     type="radio"
                     value={option}
-                    onChange={hendleInput}
+                    onChange={
+                      option === "Other" ? hendleFocusOnText : hendleInput
+                    }
                   />
                   <span className="option_text">{option}</span>
                 </label>
@@ -52,7 +75,13 @@ const QuestionComponent = (props: QuestionComponentProps) => {
               {option === "Other" ? (
                 <div className="col m4 l8 text_input">
                   <div>
-                    <input type="text" className="validate"  value={""} onChange={hendleInput}/>
+                    <input
+                      type="text"
+                      className="validate"
+                      value={textInput}
+                      onChange={hendleText}
+                      disabled={isDisabled}
+                    />
                   </div>
                 </div>
               ) : null}

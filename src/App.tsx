@@ -19,8 +19,12 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    console.log("answer", answers);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [answers]);
+
   const setAnswer = (answer: IAnswer) => {
-    console.log("answer", answer);
     let newAnswers: IAnswer[] = answers.filter(item => item.question !== answer.question);
     newAnswers.push(answer);
     setAnswers(newAnswers);
