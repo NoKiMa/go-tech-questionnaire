@@ -12,6 +12,8 @@ import IAnswer from "./models/IAnswer";
 function App() {
   const [questions, setQuestions] = useState<IQuestion[]>([]);
   const [answers, setAnswers] = useState<IAnswer[]>([]);
+  const [isRefresh, setIsRefresh] = useState<boolean>(false);
+
   useEffect(() => {
     datafetchService().then((data) => {
       let res = data;
@@ -21,26 +23,35 @@ function App() {
   }, []);
 
   useEffect(() => {
-    console.log("answer", answers);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [answers]);
+    if (isRefresh) {
+      window.location.reload();
+    }
+  }, [isRefresh]);
 
   const setAnswer = (answer: IAnswer) => {
-    let newAnswers: IAnswer[] = answers.filter(item => item.question !== answer.question);
+    let newAnswers: IAnswer[] = answers.filter(
+      (item) => item.question !== answer.question
+    );
     newAnswers.push(answer);
     setAnswers(newAnswers);
+    setIsRefresh(false);
   };
 
   const submitData = () => {
-    let requiredQuestions: string[] = questions.filter(item => item.required).map(item => item.question);
-    let requiredAnswers: string[] = answers.filter(item => item.required).map(item => item.question);
+    let requiredQuestions: string[] = questions
+      .filter((item) => item.required)
+      .map((item) => item.question);
+    let requiredAnswers: string[] = answers
+      .filter((item) => item.required)
+      .map((item) => item.question);
     if (requiredAnswers.length === requiredQuestions.length) {
+      alert("Thank you for your responses");
       pushDataService(answers);
-      alert("OK!")
+      setIsRefresh(true);
     } else {
-      alert("Fild all filds!")
+      alert("Fild all filds!");
     }
-  }
+  };
 
   return (
     <div className="App">
@@ -50,9 +61,7 @@ function App() {
       {questions.map((question) => {
         return (
           <div key={question.id} className="container">
-            <QuestionComponent
-              question={question}
-              getAnswer={setAnswer} />
+            <QuestionComponent question={question} getAnswer={setAnswer} />
           </div>
         );
       })}

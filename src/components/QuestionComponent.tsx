@@ -1,4 +1,4 @@
-import React, { useEffect,  useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../App.scss";
 import IAnswer from "../models/IAnswer";
 import IQuestion from "../models/IQuestion";
@@ -13,26 +13,13 @@ const QuestionComponent = (props: QuestionComponentProps) => {
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
   const [textInput, setTextInput] = useState<string>("");
 
-  const hendleInput = (e: any) => {
-    let answerItem: IAnswer = {
-      question: props.question.question,
-      answer: e.target.value,
-      required:props.question.required
-    };
-    setTextInput("");
-    setAnswer(answerItem);
-    setIsDisabled(true);
-  };
-
-  const hendleText = (e: any) => {
-    setTextInput(e.target.value)
-  };
+ 
 
   useEffect(() => {
     let answerItem: IAnswer = {
       question: props.question.question,
       answer: textInput,
-      required:props.question.required
+      required: props.question.required,
     };
     if (textInput === "") {
       if (!props.question.required) {
@@ -41,9 +28,9 @@ const QuestionComponent = (props: QuestionComponentProps) => {
     } else {
       setAnswer(answerItem);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[textInput])
-  
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [textInput]);
+
   const hendleFocusOnText = () => {
     setIsDisabled(false);
   };
@@ -55,13 +42,28 @@ const QuestionComponent = (props: QuestionComponentProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [answer]);
 
+  const hendleInput = (e: any) => {
+    let answerItem: IAnswer = {
+      question: props.question.question,
+      answer: e.target.value,
+      required: props.question.required,
+    };
+    setTextInput("");
+    setAnswer(answerItem);
+    setIsDisabled(true);
+  };
+
+  const hendleText = (e: any) => {
+    setTextInput(e.target.value);
+  };
+
   return (
     <div className="question_container">
       <p>
         {props.question.question}{" "}
         {props.question.required ? <span className="required">*</span> : null}
       </p>
-      <form action="#">
+      <form>
         {Array.isArray(props.question.options) ? (
           props.question.options.map((option) => (
             <div key={option} className="row option_container">
@@ -96,7 +98,12 @@ const QuestionComponent = (props: QuestionComponentProps) => {
           ))
         ) : (
           <div className="variant_text">
-            <input type="text" placeholder="Your answer" value={textInput} onChange={hendleText} />
+            <input
+              type="text"
+              placeholder="Your answer"
+              value={textInput}
+              onChange={hendleText}
+            />
           </div>
         )}
       </form>
