@@ -9,6 +9,8 @@
   font-size: calc(10px + 2vmin);
   font-family: "Red Hat Display", sans-serif;
   font-weight: 600;
+  max-width: 100%;
+  overflow-x: hidden
 }
 
 .header_container {
