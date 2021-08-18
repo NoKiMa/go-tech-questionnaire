@@ -13,8 +13,6 @@ const QuestionComponent = (props: QuestionComponentProps) => {
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
   const [textInput, setTextInput] = useState<string>("");
 
- 
-
   useEffect(() => {
     let answerItem: IAnswer = {
       question: props.question.question,
@@ -31,16 +29,16 @@ const QuestionComponent = (props: QuestionComponentProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [textInput]);
 
-  const hendleFocusOnText = () => {
-    setIsDisabled(false);
-  };
-
   useEffect(() => {
     if (answer) {
       props.getAnswer(answer);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [answer]);
+
+  const hendleFocusOnText = () => {
+    setIsDisabled(false);
+  };
 
   const hendleInput = (e: any) => {
     let answerItem: IAnswer = {

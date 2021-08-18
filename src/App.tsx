@@ -16,8 +16,7 @@ function App() {
 
   useEffect(() => {
     datafetchService().then((data) => {
-      let res = data;
-      setQuestions(res);
+      setQuestions(data);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
