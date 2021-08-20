@@ -2,7 +2,6 @@ interface ICard {
   id: number;
   question: string;
   answerOptions: string | string[];
-  userAnswer: string;
   required: boolean;
   type: ECardType;
 }
