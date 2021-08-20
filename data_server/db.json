@@ -32,5 +32,25 @@
     }
   ],
   "answers": [
+    [
+      {
+        "question": "What language is your favorite?",
+        "answer": "TypeScript",
+        "required": true,
+        "questionId": 1
+      },
+      {
+        "question": "What do you like about programing?",
+        "answer": "Сreative process",
+        "required": false,
+        "questionId": 2
+      },
+      {
+        "question": "How was the assignment?",
+        "answer": "Interesting",
+        "required": true,
+        "questionId": 3
+      }
+    ]
   ]
 }
