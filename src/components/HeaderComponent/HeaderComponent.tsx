@@ -1,6 +1,6 @@
 import React from "react";
-import "../App.scss";
-
+import "../../App.scss";
+import "./HeaderComponent.scss";
 const HeaderComponent = () => {
   return (
     <div className="header">

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import "../App.scss";
-import IAnswer from "../models/IAnswer";
-import ICard from "../models/ICard";
+import "../../App.scss";
+import "./QuestionComponent.scss";
+import IAnswer from "../../models/IAnswer";
+import ICard from "../../models/ICard";
 
 interface QuestionComponentProps {
   card: ICard;

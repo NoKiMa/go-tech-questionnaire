@@ -1,5 +1,6 @@
 import React from "react";
-import "../App.scss";
+import "../../App.scss";
+import "./FooterComponent.scss"
 
 interface FooterComponentProps {
   submitData: () => void;

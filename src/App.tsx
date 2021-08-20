@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import HeaderComponent from "./components/HeaderComponent";
-import QuestionComponent from "./components/QuestionComponent";
+import HeaderComponent from "./components/HeaderComponent/HeaderComponent";
+import QuestionComponent from "./components/QuestionComponent/QuestionComponent";
 import "./App.scss";
 // services
 import datafetchService from "./services/datafetchService";
@@ -8,7 +8,7 @@ import pushDataService from "./services/pushDataService";
 //interfaces
 import ICard from "./models/ICard";
 import IAnswer from "./models/IAnswer";
-import FooterComponent from "./components/FooterComponent";
+import FooterComponent from "./components/FooterComponent/FooterComponent";
 
 function App() {
   const [cards, setCards] = useState<ICard[]>([]);
@@ -33,6 +33,7 @@ function App() {
       (item) => item.question !== answer.question
     );
     newAnswers.push(answer);
+    console.log("newAnswers", newAnswers);
     setAnswers(newAnswers);
     setIsRefresh(false);
   };
@@ -61,7 +62,7 @@ function App() {
     <div className="App">
       <div className="container">
         <HeaderComponent />
-        <div className="main">
+        <div>
           {cards.map((card) => {
             return (
               <div key={card.id}>

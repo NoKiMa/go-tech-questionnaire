@@ -1,0 +1,41 @@
+.question_container {
+  margin-top: 20px;
+  padding-bottom: 20px;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: white;
+  border-radius: 5px;
+  p {
+    font-size: 14px;
+    padding-top: 20px;
+    text-align: left;
+    margin-left: 20px;
+    margin-bottom: 10px;
+  }
+}
+//   .required {
+//   color: red;
+//   font-size: 12px;
+//   padding-bottom: 20px;
+// }
+.option_container {
+  margin: 0;
+}
+
+.radio_btn {
+  margin-right: 20px;
+}
+.option_text {
+  font-size: 12px !important;
+  color: #000;
+}
+
+.variant_text {
+  position: relative;
+  width: 60%;
+  margin: 0 20px;
+}
+
+.text_input {
+  margin-top: 5px !important;
+}

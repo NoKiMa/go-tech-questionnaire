@@ -40,16 +40,16 @@
         "questionId": 1
       },
       {
-        "question": "What do you like about programing?",
-        "answer": "Сreative process",
-        "required": false,
-        "questionId": 2
-      },
-      {
         "question": "How was the assignment?",
         "answer": "Interesting",
         "required": true,
         "questionId": 3
+      },
+      {
+        "question": "What do you like about programing?",
+        "answer": "Creative process",
+        "required": false,
+        "questionId": 2
       }
     ]
   ]
