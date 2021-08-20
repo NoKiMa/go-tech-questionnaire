@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "../App.scss";
 import IAnswer from "../models/IAnswer";
-import IQuestion from "../models/IQuestion";
+import ICard from "../models/ICard";
 
 interface QuestionComponentProps {
-  question: IQuestion;
+  card: ICard;
   getAnswer: (answer: IAnswer) => void;
 }
 
@@ -15,12 +15,13 @@ const QuestionComponent = (props: QuestionComponentProps) => {
 
   useEffect(() => {
     let answerItem: IAnswer = {
-      question: props.question.question,
+      question: props.card.question,
       answer: textInput,
-      required: props.question.required,
+      required: props.card.required,
+      questionId: props.card.id,
     };
     if (textInput === "") {
-      if (!props.question.required) {
+      if (!props.card.required) {
         setAnswer(answerItem);
       }
     } else {
@@ -36,65 +37,49 @@ const QuestionComponent = (props: QuestionComponentProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [answer]);
 
-  const hendleFocusOnText = () => {
-    setIsDisabled(false);
-  };
-
   const hendleInput = (e: any) => {
     let answerItem: IAnswer = {
-      question: props.question.question,
+      question: props.card.question,
       answer: e.target.value,
-      required: props.question.required,
+      required: props.card.required,
+      questionId: props.card.id,
     };
     setTextInput("");
     setAnswer(answerItem);
     setIsDisabled(true);
   };
 
+  const hendleFocusOnText = () => {
+    setIsDisabled(false);
+  };
+
   const hendleText = (e: any) => {
     setTextInput(e.target.value);
   };
 
-  return (
-    <div className="question_container">
-      <p>
-        {props.question.question}{" "}
-        {props.question.required ? <span className="required">*</span> : null}
-      </p>
-      <form>
-        {Array.isArray(props.question.options) ? (
-          props.question.options.map((option) => (
-            <div key={option} className="row option_container">
-              <p className="col m1 l1 radio_btn">
-                <label>
-                  <input
-                    className="with-gap"
-                    name="group1"
-                    type="radio"
-                    value={option}
-                    onChange={
-                      option === "Other" ? hendleFocusOnText : hendleInput
-                    }
-                  />
-                  <span className="option_text">{option}</span>
-                </label>
-              </p>
-              {option === "Other" ? (
-                <div className="col m4 l8 text_input">
-                  <div>
+  const renderCard = (card: ICard) => {
+    switch (card.type) {
+      case "radio":
+        return Array.isArray(card.answerOptions)
+          ? card.answerOptions.map((option) => (
+              <div key={option} className="row option_container">
+                <p className="col m1 l1 radio_btn">
+                  <label>
                     <input
-                      type="text"
-                      className="validate"
-                      value={textInput}
-                      onChange={hendleText}
-                      disabled={isDisabled}
+                      className="with-gap"
+                      name="group1"
+                      type="radio"
+                      value={option}
+                      onChange={hendleInput}
                     />
-                  </div>
-                </div>
-              ) : null}
-            </div>
-          ))
-        ) : (
+                    <span className="option_text">{option}</span>
+                  </label>
+                </p>
+              </div>
+            ))
+          : null;
+      case "text":
+        return (
           <div className="variant_text">
             <input
               type="text"
@@ -103,8 +88,51 @@ const QuestionComponent = (props: QuestionComponentProps) => {
               onChange={hendleText}
             />
           </div>
-        )}
-      </form>
+        );
+      case "radioWithText":
+        return Array.isArray(card.answerOptions)
+          ? card.answerOptions.map((option) => (
+              <div key={option} className="row option_container">
+                <p className="col m1 l1 radio_btn">
+                  <label>
+                    <input
+                      className="with-gap"
+                      name="group1"
+                      type="radio"
+                      value={option}
+                      onChange={
+                        option === "Other" ? hendleFocusOnText : hendleInput
+                      }
+                    />
+                    <span className="option_text">{option}</span>
+                  </label>
+                </p>
+                {option === "Other" ? (
+                  <div className="col m4 l8 text_input">
+                    <div>
+                      <input
+                        type="text"
+                        className="validate"
+                        value={textInput}
+                        onChange={hendleText}
+                        disabled={isDisabled}
+                      />
+                    </div>
+                  </div>
+                ) : null}
+              </div>
+            ))
+          : null;
+    }
+  };
+
+  return (
+    <div className="question_container">
+      <p>
+        {props.card.question}{" "}
+        {props.card.required ? <span className="required">*</span> : null}
+      </p>
+      <form>{renderCard(props.card)}</form>
     </div>
   );
 };

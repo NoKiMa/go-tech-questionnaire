@@ -6,17 +6,18 @@ import "./App.scss";
 import datafetchService from "./services/datafetchService";
 import pushDataService from "./services/pushDataService";
 //interfaces
-import IQuestion from "./models/IQuestion";
+import ICard from "./models/ICard";
 import IAnswer from "./models/IAnswer";
+import FooterComponent from "./components/FooterComponent";
 
 function App() {
-  const [questions, setQuestions] = useState<IQuestion[]>([]);
+  const [cards, setCards] = useState<ICard[]>([]);
   const [answers, setAnswers] = useState<IAnswer[]>([]);
   const [isRefresh, setIsRefresh] = useState<boolean>(false);
 
   useEffect(() => {
     datafetchService().then((data) => {
-      setQuestions(data);
+      setCards(data);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -36,19 +37,23 @@ function App() {
     setIsRefresh(false);
   };
 
+  const isRequierdsFieldsFillUp = () => {
+    let requiredQuestionsLength: number = cards.filter(
+      (item) => item.required && item.id
+    ).length;
+    let requiredAnswersLength: number = answers.filter(
+      (item) => item.required && item.questionId
+    ).length;
+    return requiredAnswersLength === requiredQuestionsLength;
+  };
+
   const submitData = () => {
-    let requiredQuestions: string[] = questions
-      .filter((item) => item.required)
-      .map((item) => item.question);
-    let requiredAnswers: string[] = answers
-      .filter((item) => item.required)
-      .map((item) => item.question);
-    if (requiredAnswers.length === requiredQuestions.length) {
+    if (isRequierdsFieldsFillUp()) {
       alert("Thank you for your responses");
       pushDataService(answers);
       setIsRefresh(true);
     } else {
-      alert("Fild all filds!");
+      alert("Please fill in all required fields");
     }
   };
 
@@ -56,25 +61,16 @@ function App() {
     <div className="App">
       <div className="container">
         <HeaderComponent />
-      </div>
-      {questions.map((question) => {
-        return (
-          <div key={question.id} className="container">
-            <QuestionComponent question={question} getAnswer={setAnswer} />
-          </div>
-        );
-      })}
-      <div className="container">
-        <div className="row">
-          <div className="col s12 offset-s5">
-            <button
-              className="waves-effect waves-light btn submit_btn"
-              onClick={submitData}
-            >
-              Submit
-            </button>
-          </div>
+        <div className="main">
+          {cards.map((card) => {
+            return (
+              <div key={card.id}>
+                <QuestionComponent card={card} getAnswer={setAnswer} />
+              </div>
+            );
+          })}
         </div>
+        <FooterComponent submitData={submitData} />
       </div>
     </div>
   );

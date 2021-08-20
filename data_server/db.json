@@ -8,7 +8,7 @@
         "TypeScript",
         "CoffeeScript"
       ],
-      "type": "checkbox",
+      "type": "radio",
       "required": true
     },
     {
@@ -27,7 +27,7 @@
         "Hard",
         "Other"
       ],
-      "type": "radio",
+      "type": "radioWithText",
       "required": true
     }
   ],

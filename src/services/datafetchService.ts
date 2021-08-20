@@ -1,13 +1,14 @@
-import IQuestion from "../models/IQuestion";
+import ICard from "../models/ICard";
 import { QUESTIONS_URL } from "../utils/const";
 
 const datafetchService = async () => {
   let response = await fetch(QUESTIONS_URL);
   let data = await response.json();
-  let res: IQuestion[] = data.map((item: any) => {
+  let res: ICard[] = data.map((item: any) => {
     return {
       id: item.id,
-      options: item.options,
+      answerOptions: item.options,
+      userAnswer: "",
       question: item.question,
       required: item.required,
       type: item.type,

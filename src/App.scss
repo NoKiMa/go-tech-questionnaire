@@ -1,6 +1,5 @@
 .App {
   text-align: center;
-  // background-color: #ffe9f9;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -10,10 +9,10 @@
   font-family: "Red Hat Display", sans-serif;
   font-weight: 600;
   max-width: 100%;
-  overflow-x: hidden
+  overflow-x: hidden;
 }
 
-.header_container {
+.header {
   margin-top: 50px;
   padding-bottom: 20px;
   align-items: center;
@@ -64,54 +63,57 @@
     margin-bottom: 10px;
   }
 }
-.text_variant{
+.text_variant {
   font-size: 12px;
   align-self: center;
   justify-self: center;
-  position: relative; 
+  position: relative;
   top: 0;
   left: 10px;
   padding: 0 !important;
-  margin:0 20px !important;
+  margin: 0 20px !important;
 }
 
-.variant{
+.variant {
   position: relative;
   justify-content: center;
-  align-items:center;
+  align-items: center;
   flex-direction: row;
   margin-left: 20px;
   padding-bottom: 10px;
 }
 
-.variant_text{
+.variant_text {
   position: relative;
   width: 60%;
   margin: 0 20px;
 }
 
-.radio_btn{
+.radio_btn {
   margin-right: 20px;
 }
 
-.text_input{
+.text_input {
   margin-top: 5px !important;
 }
-.option_container{
+.option_container {
   margin: 0;
 }
-.option_text{
-  font-size:12px !important;
+.option_text {
+  font-size: 12px !important;
   color: #000;
 }
-.submit_btn{
+.submit_btn {
   margin: 20px;
   background-color: #00bfd8;
   border-color: #00bfd8;
-  color:#fff;
+  color: #fff;
   border-radius: 5px;
   font-size: 15px;
-  text-transform:capitalize;
- }
+  text-transform: capitalize;
+}
 
- 
+.footer {
+  display: flex;
+  justify-content: flex-end;
+}
