@@ -1,7 +1,7 @@
-import IQuestionary from "../models/IAnswer";
+import IAnswer from "../models/IAnswer";
 import { ANSWER_URL } from "../utils/const";
 
-const datafetchService = async (data: IQuestionary[]) => {
+const datafetchService = async (data: IAnswer[]) => {
   await fetch(ANSWER_URL, {
     method: "POST",
     body: JSON.stringify(data),
